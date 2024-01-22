@@ -1,6 +1,6 @@
-#!/bin/bash
+##!/bin/bash
 
-if [ $EUID -ne 0 ]; then
+if [ "$(id -u)" -ne 0 ]; then
   echo "The script needs to be run with elevated privilleges. Exiting."
   exit 1
 fi
@@ -27,7 +27,6 @@ case $user_choice in
 	echo "Error: Destination directory or username is invalid. Try again."
     fi
     ;;
-
   2)
     echo "Backing up all log files..."
     tar -czvf "/tmp/all_logs_backup_$(date +%Y-%m-%d).tar.gz" /var/log/* &>/dev/null
@@ -38,7 +37,6 @@ case $user_choice in
       echo "Error Backup process encountered an issue."
     fi
     ;;
-
   3)
     read -p "Enter the path of the folder you want to backup: " folder_path
     read -p "Enter the destination directory for the backup: " destination_dir
@@ -47,12 +45,16 @@ case $user_choice in
       echo "Backing up specific folder..."
       tar -czvf "$destination_dir/$(basename $folder_path)_backup_$(date +%Y-%m-%d).tar.gz" "$folder_path" &>/dev/null
 
-    if [ $? -eq 0 ]; then
-      echo "Backup completed successfully. ('${destination_dir}/$(basename $folder_path)_backup_$(date +%Y-%m-%d).tar.gz')"
+      if [ $? -eq 0 ]; then
+        echo "Backup completed successfully. (${destination_dir}/$(basename $folder_path)_backup_$(date +%Y-%m-%d).tar.gz)"
+      else
+        echo "Error: Backup process encountered an issue."
+      fi
     else
-      echo "Error: Backup process encountered an issue."
+      echo "Error: Folder or destination directory is invalid. Try again."
     fi
     ;;
   *)
     echo "Invalid choice. Exiting."
+    ;;
 esac
