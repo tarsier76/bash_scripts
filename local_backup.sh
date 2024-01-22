@@ -1,8 +1,7 @@
-##!/bin/bash
+#!/bin/bash
 
 if [ "$(id -u)" -ne 0 ]; then
   echo "The script needs to be run with elevated privilleges. Exiting."
-  exit 1
 fi
 
 echo -e "Choose one of the following options: \n1.Backup a home directory.\n2.Backup all log files on the system.\n3.Backup a specific folder in the system."
