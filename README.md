@@ -1,3 +1,3 @@
-# various_scripts
+# Bash Scripts
 
-**This repository contains various utility scripts written in bash, python and powershell.**
+**A collection of useful bash scripts.**
