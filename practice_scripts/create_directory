@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# mkdir $HOME/bpl
+
+mkdir -p $HOME/bpl/bin $HOME/bpl/scripts
